@@ -46,7 +46,7 @@ let tableModalDiagnosticos = new DataTable('#tablaModalDiagnosticos', {
     }
 });
 
-let tableEpicrisis = new DataTable('#tablaEpicrisis', {
+/* let tableEpicrisis = new DataTable('#tablaEpicrisis', {
     language: {
         "lengthMenu": "_MENU_ registros",
         "search": "Filtrar:",
@@ -62,7 +62,7 @@ let tableEpicrisis = new DataTable('#tablaEpicrisis', {
     },
     columnDefs: [{ orderable: false, targets: 1 }],
     order: [[0, 'desc']]
-});
+}); */
 
 let tablePrevaloraciones = new DataTable('#tablaPrevaloraciones', {
     language: {

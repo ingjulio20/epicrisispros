@@ -25,46 +25,71 @@
             <div class="content">
                 <!-- RadioButtons para indicar tipo de busqueda -->
                 <div class="control">
-                    <label class="radio">
-                        <input type="radio" name="foobar" />
-                        Foo
+                    <label style="font-size: small;" class="radio">
+                        <input type="radio" name="toogle" id="searchDocumento" value="active" checked />
+                        Busqueda por Documento
                     </label>
-                    <label class="radio">
-                        <input type="radio" name="foobar" checked />
-                        Bar
+                    <label style="font-size: small;" class="radio">
+                        <input type="radio" name="toogle" id="searchHistoria" value="inactive" />
+                        Busqueda por Historia
                     </label>
                 </div>
-                <!-- <table id="tablaEpicrisis" class="table is-striped" style="width: 100%;">
-                    <thead>
-                        <tr>
-                            <th scope="col" style="width: 5%;">ID</th>
-                            <th scope="col" style="width: 15%;">Fecha</th>
-                            <th scope="col" style="width: 15%;">Hora</th>
-                            <th scope="col" style="width: 15%;">Documento</th>
-                            <th scope="col" style="width: 40%;">Paciente</th>
-                            <th scope="col" style="width: 10%;">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for registro in registros %}
-                        <tr>
-                            <td style="width: 5%;">{{ registro.id }}</td>
-                            <td style="width: 15%;">{{ registro.ingreso }}</td>
-                            <td style="width: 15%;">{{ registro.egreso }}</td>
-                            <td style="width: 15%;">{{ registro.codigo }}</td>
-                            <td style="width: 40%;">{{ registro.nombre }}</td>
-                            <td style="width: 10%;">
-                                <a href="/edit_epicrisis/{{ registro.id }}" class="button is-small is-primary">
-                                    <span class="icon is-small"><i><img src="{{ url_for('static', filename='img/icons/editar.png') }}" alt="ico"></i></span>
-                                </a>
-                                <a href="/hc_epicrisis/{{ registro.codigo }}/{{ registro.id }}/{{ session['codigo'] }}" target="_self" class="button is-small is-primary">
-                                    <span class="icon is-small"><i><img src="{{ url_for('static', filename='img/icons/imprimir.png') }}" alt="ico"></i></span>
-                                </a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table> -->
+                <br/>
+                <div id="containerSearchDocumento" class="container is-active">
+                    <div class="field is-grouped">
+                        <p class="control">
+                            <label for="busquedaEpicrisisDocumento" class="label is-small"><strong style="color: red;">*</strong> No. Documento: </label>
+                        </p>
+                        <p class="control is-expanded">
+                            <input type="number" name="busquedaEpicrisisDocumento" id="busquedaEpicrisisDocumento" class="input is-small">
+                        </p>
+                    </div>
+                </div>
+                <div id="containerSearchHistoria" class="container is-hidden">
+                    <div class="field is-grouped">
+                        <p class="control">
+                            <label for="busquedaEpicrisisHistoria" class="label is-small"><strong style="color: red;">*</strong> No. Historia: </label>
+                        </p>
+                        <p class="control is-expanded">
+                            <input type="number" name="busquedaEpicrisisHistoria" id="busquedaEpicrisisHistoria" class="input is-small">
+                        </p>
+                    </div>
+                </div>
+                <br/>
+                <section class="scrollable-section">
+                    <table id="tablaEpicrisis" class="table is-striped" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 5%; font-size: small;">ID</th>
+                                <th scope="col" style="width: 15%; font-size: small;">Fecha</th>
+                                <th scope="col" style="width: 15%; font-size: small;">Hora</th>
+                                <th scope="col" style="width: 15%; font-size: small;">Documento</th>
+                                <th scope="col" style="width: 30%; font-size: small;">Paciente</th>
+                                <th scope="col" style="width: 10%; font-size: small;">Historia</th>
+                                <th scope="col" style="width: 10%; font-size: small;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- {% for registro in registros %}
+                            <tr>
+                                <td style="width: 5%;">{{ registro.id }}</td>
+                                <td style="width: 15%;">{{ registro.ingreso }}</td>
+                                <td style="width: 15%;">{{ registro.egreso }}</td>
+                                <td style="width: 15%;">{{ registro.codigo }}</td>
+                                <td style="width: 40%;">{{ registro.nombre }}</td>
+                                <td style="width: 10%;">
+                                    <a href="/edit_epicrisis/{{ registro.id }}" class="button is-small is-primary">
+                                        <span class="icon is-small"><i><img src="{{ url_for('static', filename='img/icons/editar.png') }}" alt="ico"></i></span>
+                                    </a>
+                                    <a href="/hc_epicrisis/{{ registro.codigo }}/{{ registro.id }}/{{ session['codigo'] }}" target="_self" class="button is-small is-primary">
+                                        <span class="icon is-small"><i><img src="{{ url_for('static', filename='img/icons/imprimir.png') }}" alt="ico"></i></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %} -->
+                        </tbody>
+                    </table>
+                </section>
             </div>
         </div>
     </div>
