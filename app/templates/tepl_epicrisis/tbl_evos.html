@@ -1,0 +1,15 @@
+<thead>
+    <tr>
+        <th scope="col", style="width: 10%;">Fecha</th>
+        <th scope="col", style="width: 90%;">Evolución</th>
+    </tr>
+</thead>
+<tbody>
+    {% for evolucion in evoluciones %}
+    <tr>
+        
+        <td style="width: 10%;">{{ evolucion.fecha }}</td>
+        <td style="width: 90%; white-space: pre-line;">{{ evolucion.contenido }}</td>
+    </tr>
+    {% endfor %}
+</tbody>

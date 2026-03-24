@@ -1,0 +1,77 @@
+{% extends 'menu.html' %}
+{% block title %}Prevaloraciones{% endblock%}
+{% block content %}
+<h5 class="title is-5">Prevaloraciones</h5>
+<div class="container">
+    <div class="field is-grouped">
+        <p class="control">
+            <a href="{{ url_for('prevaloraciones.add_prevaloracion') }}" class="button is-info">
+                <span class="icon"><i><img src="{{ url_for('static', filename='img/icons/añadir.png') }}" alt="ico"></i></span>
+                <span>Nueva Prevaloración</span>
+            </a>
+        </p>
+    </div>
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title">Registros</p>
+        </header>
+        <div class="card-content">
+            <div class="content">
+                <table id="tablaPrevaloraciones" class="table is striped" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 5%;">ID</th>
+                            <th scope="col" style="width: 15%;">Fecha</th>
+                            <th scope="col" style="width: 15%;">Hora</th>
+                            <th scope="col" style="width: 15%;">Documento</th>
+                            <th scope="col" style="width: 40%;">Paciente</th>
+                            <th scope="col" style="width: 5%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for registro in registros %}
+                        <tr>
+                            <td style="width: 5%;">{{ registro.id }}</td>
+                            <td style="width: 15%;">{{ registro.fecha }}</td>
+                            <td style="width: 15%;">{{ registro.hora }}</td>
+                            <td style="width: 15%;">{{ registro.documento }}</td>
+                            <td style="width: 40%;">{{ registro.paciente }}</td>
+                            <td style="width: 5%;">
+                                <a href="/hc_prevaloracion/{{ registro.documento }}/{{ registro.id }}/{{ session['codigo'] }}" target="_self" class="button is-small is-primary">
+                                    <span class="icon is-small"><i><img src="{{ url_for('static', filename='img/icons/imprimir.png') }}" alt="ico"></i></span>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                Swal.fire({
+                    title: "Notificacion!",
+                    text: "{{ message }}",
+                    icon: "{{ category }}"
+                })
+            });
+        </script>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let $item1 = document.getElementById("item1")
+        $item1.className = "is-active"
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,300 @@
+{% extends 'menu.html' %}
+{% block title %}Nueva Epicrisis{% endblock %}
+{% block content %}
+<h5 class="title is-5">Nueva Epicrisis</h5>
+<form action="{{ url_for('epicrisis.insert_epicrisis') }}" method="post">
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title">Datos de Epicrisis</p>
+        </header>
+        <div class="card-content">
+            <div class="content">
+                <input type="text" name="medico" id="medico" value="{{ session['codigo'] }}" hidden>
+                <div class="field is-horizontal">
+                    <div class="field-body">
+                        <div class="field has-addons">
+                            <p class="control">
+                                <label for="fecha" class="label is-small">Fecha Registro</label>
+                                <input type="date" name="fecha" id="fecha" class="input is-small" readonly required>
+                            </p>
+                            <p class="control">
+                                <label for="hora" class="label is-small">Hora Registro</label>
+                                <input type="time" name="hora" id="hora" class="input is-small" readonly required>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-body">
+                        <div class="field has-addons">
+                            <p class="control is-expanded">
+                                <label for="fecha_ingreso" class="label">Fecha Ingreso</label>
+                                <input type="date" name="fecha_ingreso" id="fecha_ingreso" class="input" required>
+                            </p>
+                            <p class="control is-expanded">
+                                <label for="fecha_egreso" class="label">Fecha Egreso</label>
+                                <input type="date" name="fecha_egreso" id="fecha_egreso" class="input" required>
+                            </p>
+                        </div>
+                        <div class="field has-addons">
+                            <p class="control">
+                                <label for="codigo" class="label">Paciente</label>
+                                <input type="text" name="codigo" id="codigo" class="input" onchange="consulta_ajax()" required readonly>
+                            </p>
+                            <p class="control is-expanded">
+                                <label for="paciente" class="label" style="color: white;">.</label>
+                                <input type="text" name="paciente" id="paciente" class="input" required readonly>
+                            </p>
+                            <p class="control">
+                                <label for="" class="label" style="color: white;">.</label>
+                                <a class="button is-primary js-modal-trigger" data-target="modalPacientes">
+                                    <span class="icon"><i><img src="{{ url_for('static', filename='img/icons/usuario.png') }}" alt="ico"></i></span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <section class="section scrollable-section">
+                    <div class="field">
+                        <label for="motivo_consulta" class="label">Motivo de Consulta</label>
+                        <p class="control">
+                            <!-- <textarea class="textarea is-uppercase" name="motivo_consulta" id="motivo_consulta" required></textarea> -->
+                             <span class="select">
+                                <select name="motivo_consulta" id="motivo_consulta" required>
+                                    <option value="INGRESO A PROGRAMA DE HOSPITAL DÍA">INGRESO A PROGRAMA DE HOSPITAL DÍA</option>
+                                    <option value="CONTINÚA EN PROGRAMA DE HOSPITAL DÍA">CONTINÚA EN PROGRAMA DE HOSPITAL DÍA</option>
+                                    <option value="EGRESO DE PROGRAMA DE HOSPITAL DÍA">EGRESO DE PROGRAMA DE HOSPITAL DÍA</option>
+                                </select>
+                             </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label for="evolucion_clinica" class="label">Evolución Clinica</label>
+                        <p class="control">
+                            <textarea class="textarea is-uppercase" name="evolucion_clinica" id="evolucion_clinica" required></textarea>
+                        </p>
+                        <a onclick="consulta_ajax()" class="button is-small is-primary">
+                            <span>Consultar Evos.</span>
+                        </a>
+                        <a id="ver_evos" class="button is-small is-info js-modal-trigger" data-target="modalEvoluciones">
+                            <span>Ver Evos.</span>
+                        </a>
+                    </div>
+                    <div class="field">
+                        <label for="tratamiento" class="label">Tratamiento</label>
+                        <p class="control">
+                            <textarea class="textarea is-uppercase" name="tratamiento" id="tratamiento" required>PACIENTE A QUIEN SE LE RELIZA INTERVENCION MULTIDISCIPLINARIA CON EQUIPO TERAPEUTICO A TRAVES DE TALLERES DE PSICOEDUCACION, TERAPIAS FAMILIARES, INDIVIDUALES, FAMILIARES, GRUPALES Y DEPORTIVA. 
+                            </textarea>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label for="examen_clinico" class="label">Examenes Clinicos y Paraclinicos</label>
+                        <p class="control">
+                            <textarea class="textarea is-uppercase" name="examen_clinico" id="examen_clinico" required></textarea>
+                        </p>
+                    </div>
+                    <div class="field has-addons">
+                        <p class="control">
+                            <label for="continua" class="label">Continua hospitalizado parcialmente: </label>
+                        </p>
+                        <p class="control">
+                            <span class="select">
+                                <select name="continua" id="continua" required>
+                                    <option value="SÍ">SÍ</option>
+                                    <option value="NO">NO</option>
+                                </select>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field has-addons">
+                        <p class="control">
+                            <label class="label">Diagnostico de Egreso:</label>
+                            <input type="text" name="cod_diag" id="cod_diag" class="input" readonly required>
+                        </p>
+                        <p class="control is-expanded">
+                            <label class="label" style="color: white;">.</label>
+                            <input type="text" name="nom_diag" id="nom_diag" class="input" readonly required>
+                        </p>
+                        <p class="control">
+                            <label class="label" style="color: white;">.</label>
+                            <a class="button is-primary js-modal-trigger" data-target="modalDiagnosticos">
+                                ...
+                            </a>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label for="plan" class="label">Plan de Tratamiento</label>
+                        <p class="control">
+                            <textarea class="textarea is-uppercase" name="plan" id="plan" required></textarea>
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="field is-grouped is-grouped-centered is-fixed-bottom">
+        <p class="control">
+            <button type="submit" class="button is-success">
+                <span class="icon"><i><img src="{{ url_for('static', filename='img/icons/guardar.png') }}" alt="ico"></i></span>
+                <span>Guardar</span>
+            </button>
+        </p>
+        <p class="control">
+            <a onclick="confirmacion()" class="button is-danger">
+                <span class="icon"><i><img src="{{ url_for('static', filename='img/icons/cancelar.png') }}" alt="ico"></i></span>
+                <span>Cancelar</span>
+            </a>
+            <script>
+                const confirmacion = () => {
+                    Swal.fire({
+                        title: "Esta seguro(a) ?",
+                        text: "Desea cancelar esta operación",
+                        icon: "question",
+                        confirmButtonText: "Si, Cancelar",
+                        showCancelButton: true,
+                        cancelButtonText: "No, Continúar",
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                    }).then((result) => {
+                        if(result.isConfirmed){
+                            window.location.href = "{{ url_for('epicrisis.epicrisis', medico = session['codigo']) }}"
+                        }
+                    })
+                }
+            </script>
+        </p>
+    </div>
+</form>
+
+<!-- Modal Pacientes -->
+<div id="modalPacientes" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box" style="width: auto;">
+            <h6 class="title is-6">Busqueda de Pacientes</h6>
+            <table id="tablaModalPacientes" class="table is-hoverable" style="width: 100%; cursor: pointer;">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;" scope="col">No. Documento</th>
+                        <th style="width: 80%;" scope="col">Nombre Completo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for paciente in pacientes %}
+                    <tr>
+                        <td style="width: 20%;">{{ paciente.codigo }}</td>
+                        <td style="width: 80%;">{{ paciente.nombre }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button class="modal-close" aria-label="close"></button>
+</div>
+
+<!-- Modal Evoluciones AJAX -->
+<div id="modalEvoluciones" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box">
+            <h6 class="title is-6">Busqueda de Evoluciones</h6>
+            <table id="tablaModalEvoluciones" class="table is-hoverable" style="width: 100%; cursor: pointer;">
+                
+            </table>
+        </div>
+    </div>
+    <button class="modal-close" aria-label="close"></button>
+</div>
+
+<!-- Modal Diagnosticos -->
+<div id="modalDiagnosticos" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="content">
+            <div class="box" style="width: auto;">
+                <h6 class="title is-6">Busqueda de Diagnosticos</h6>
+                <table id="tablaModalDiagnosticos" class="table is-hoverable" style="width: 100%; cursor: pointer;">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 20%;">Codigo</th>
+                            <th scope="col" style="width: 80%;">Diagnostico</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for diagnostico in diagnosticos %}
+                        <tr>
+                            <td style="width: 20%;">{{ diagnostico.codigo }}</td>
+                            <td style="width: 80%;">{{ diagnostico.nombre }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <button class="modal-close" aria-label="close"></button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/epicrisis.js') }}"></script>
+
+<!-- Script Activar Item del Menú -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let $item2 = document.getElementById("item2")
+        $item2.className = "is-active"
+    })
+</script>
+<!-- Script Cargar Fecha y Hora Actuales -->
+<script>
+    const $fecha = document.getElementById("fecha");
+    const $hora = document.getElementById("hora");
+    document.addEventListener("DOMContentLoaded", () => {
+        let fecha = new Date()
+        let anio = fecha.getFullYear()
+        let mes = fecha.getMonth() + 1;
+        let dia = fecha.getDate();
+
+        if (mes < 10){
+            mes = "0" + mes;
+        }
+
+        if (dia < 10){
+            dia = "0" + dia;
+        }
+
+        $fecha.value = anio + "-" + mes + "-" + dia;
+        let hora = fecha.getHours().toString().padStart(2, '0')
+        let minutos = fecha.getMinutes().toString().padStart(2, '0')
+        $hora.value = `${hora}:${minutos}`
+    })
+</script>
+
+<!-- Script AJAX evoluciones -->
+<script type="text/javascript">
+    function consulta_ajax(){
+        let fechaInicio = document.getElementById("fecha_ingreso").value
+        let fechaFin = document.getElementById("fecha_egreso").value
+        let codigo = document.getElementById("codigo").value 
+        let medico = document.getElementById("medico").value
+        let tabla = document.getElementById("tablaModalEvoluciones");
+        $.ajax({
+            url:"/get_evoluciones",
+            type:"POST",
+            data: {"fecha_ingreso": fechaInicio,
+                   "fecha_egreso": fechaFin,
+                   "medico": medico,
+                   "codigo": codigo
+                  },
+            success: function(response){
+                tabla.innerHTML = response
+        },
+        error: function(error){
+        //console.log(error);
+        },
+        });
+    }
+</script>
+{% endblock %}

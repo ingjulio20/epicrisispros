@@ -1,0 +1,120 @@
+{% extends 'menu.html' %}
+{% block title %}Epicrisis{% endblock %}
+{% block content %}
+<h5 class="title is-5">Epicrisis</h5>
+<div class="container">
+    <div class="field is-grouped">
+        <p class="control">
+            <a href="{{ url_for('epicrisis.add_epicrisis') }}" class="button is-info">
+                <span class="icon"><i><img src="{{ url_for('static', filename='img/icons/añadir.png') }}" alt="ico"></i></span>
+                <span>Nueva Epicrisis</span>
+            </a>
+        </p>
+        <p class="control">
+            <button class="button is-info js-modal-trigger" data-target="modal-DescargaXLote" disabled>
+                <span class="icon"><i><img src="{{ url_for('static', filename='img/icons/pdf.png') }}" alt="ico"></i></span>
+                <span>Descarga por Lote</span>
+            </button>
+        </p>
+    </div>
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title">Registros</p>
+        </header>
+        <div class="card-content">
+            <div class="content">
+                <table id="tablaEpicrisis" class="table is-striped" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 5%;">ID</th>
+                            <th scope="col" style="width: 15%;">Fecha</th>
+                            <th scope="col" style="width: 15%;">Hora</th>
+                            <th scope="col" style="width: 15%;">Documento</th>
+                            <th scope="col" style="width: 40%;">Paciente</th>
+                            <th scope="col" style="width: 10%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for registro in registros %}
+                        <tr>
+                            <td style="width: 5%;">{{ registro.id }}</td>
+                            <td style="width: 15%;">{{ registro.ingreso }}</td>
+                            <td style="width: 15%;">{{ registro.egreso }}</td>
+                            <td style="width: 15%;">{{ registro.codigo }}</td>
+                            <td style="width: 40%;">{{ registro.nombre }}</td>
+                            <td style="width: 10%;">
+                                <a href="/edit_epicrisis/{{ registro.id }}" class="button is-small is-primary">
+                                    <span class="icon is-small"><i><img src="{{ url_for('static', filename='img/icons/editar.png') }}" alt="ico"></i></span>
+                                </a>
+                                <a href="/hc_epicrisis/{{ registro.codigo }}/{{ registro.id }}/{{ session['codigo'] }}" target="_self" class="button is-small is-primary">
+                                    <span class="icon is-small"><i><img src="{{ url_for('static', filename='img/icons/imprimir.png') }}" alt="ico"></i></span>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Form Descarga por lote -->
+<div class="modal" id="modal-DescargaXLote">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <form action="#" method="post">
+            <div class="box">
+                <h6 class="title is-6">Descarga de Epicrisis</h6>
+                <div class="field is-horizontal">
+                    <div class="field-body">
+                        <div class="field">
+                            <label for="fechaInicio" class="label is-small">Fecha Inicio</label>
+                            <input type="date" name="fechaInicio" id="fechaInicio" class="input is-small" required>
+                        </div>
+                        <div class="field">
+                            <label for="fechaFin" class="label is-small">Fecha Fin</label>
+                            <input type="date" name="fechaFin" id="fechaFin" class="input is-small" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="field ">
+                    <p class="control">
+                        <button class="button is-small is-info is-fullwidth">
+                            <span class="icon is-small"><i><img src="{{ url_for('static', filename='img/icons/descargar.png') }}" alt="ico"></i></span>
+                            <span>Descargar</span>
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <script>
+            document.addEventListener("DOMContentLoaded", () =>{
+                Swal.fire({
+                    title: 'Notificación!',
+                    text: '{{ message }}',
+                    icon: '{{ category }}',
+                    confirmButtonText: 'Cool'
+                })
+            })
+        </script>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let $item2 = document.getElementById("item2")
+        $item2.className = "is-active"
+    })
+</script>
+{% endblock %}

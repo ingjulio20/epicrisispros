@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es" class="has-aside-left has-aside-mobile-transition has-navbar-fixed-top has-aside-expanded">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bulma Framework -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.min.css') }}">
+    <!-- Estilos Personales -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <!-- Fuentes -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/icons/favicon.ico') }}">
+    <!-- CSS Datatables -->
+   <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.1/css/bulma.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bulma.css">
+    <!-- CSS SweetAlert2 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sweetalert2.min.css') }}">
+    <style>
+        aside.aside {
+            display: block;
+            background: #3695e3;
+        }
+        
+        aside.aside .aside-tools{
+            background-color: #3695e3;
+        }
+
+        .menu-list a:hover{
+            background-color: #3886c5;
+        }
+
+        .menu-list a.is-active {
+            background-color: #3886c5;
+        }
+
+        .scrollable-section {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 3rem 0rem;
+        }
+    </style>
+    <title>PROSPERIDAD IPS - {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="app">
+        <nav id="navbar-main" class="navbar is-fixed-top" role="navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item is-hidden-desktop jb-aside-mobile-toggle">
+                    <span class="icon"><i class="mdi mdi-forwardburger mdi-24px"></i></span>
+                </a>
+                <div class="navbar-item has-control">
+                    <div class="control"><input placeholder="Search everywhere..." class="input"></div>
+                </div>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown has-dropdown-with-icons has-divider is-hoverable">
+                    <a class="navbar-link is-arrowless">
+                      <span class="icon"><i class="fa fa-user-circle"></i></span>
+                      <span>{{ session['codigo'] }}</span>
+                      <span class="icon"><i class="fa fa-chevron-down"></i></span>
+                    </a>
+                    <div class="navbar-dropdown">
+                      <a href="{{ url_for('index.logout') }}" class="navbar-item">
+                        <span class="icon"><i class="fa fa-sign-out"></i></span>
+                        <span>Cerrar Sesión</span>
+                      </a>
+                    </div>
+            </div>
+        </nav>
+        <aside class="aside is-placed-left is-expanded">
+            <div class="aside-tools">
+                <div class="aside-tools-label">
+                    <a href="#" style="color: white; align-items: center;">
+                        <img src="{{ url_for('static', filename='img/logo-prosperidad-vct.webp') }}" alt="logo-prosperidad" width="150" height="150">
+                    </a>
+                </div>
+            </div>
+            <div class="menu is-menu-main">
+                <p class="menu-label" style="color: white;">Menú Principal</p>
+                <ul class="menu-list">
+                    <li>
+                        <a id="item1" href="{{ url_for('prevaloraciones.prevaloraciones', medico = session['codigo']) }}" class="router-link-active has-icon" style="color: white;">
+                            <span class="icon"></span>
+                            <span>Prevaloraciones</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="item2" href="{{ url_for('epicrisis.epicrisis', medico = session['codigo']) }}" class="has-icon" style="color: white;">
+                            <span class="icon"></span>
+                            <span>Epicrisis</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <section class="section is-main-section">
+            {% block content %}
+            {% endblock %}
+        </section>
+    </div>
+</body>
+
+{% block scripts %}
+{% endblock %}
+<!-- Script Modals -->
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+<!-- Script SweetAlert2 -->
+<script src="{{ url_for('static', filename='js/sweetalert2.all.min.js') }}"></script>
+<!-- Scripts DataTables -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.bulma.js"></script>
+<!-- Script Invoke DataTables -->
+<script src="{{ url_for('static', filename='js/dataTables.js') }}"></script>
+</html>

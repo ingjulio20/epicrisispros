@@ -1,0 +1,78 @@
+{% extends 'baseReport.html' %}
+{% block title %}Historia Prevaloración{% endblock%}
+{% block report %}
+<!-- Datos de Paciente -->
+<hr>
+<table style="height: 82px; float: left; width: 640px;">
+    <tbody>
+        <tr>
+            <td style="width: 221px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small"><strong>No. Documento:</strong>{{ paciente.0 }}-{{ paciente.1 }}</td>
+            <td style="width: 541px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small" colspan="2"><strong>Nombre Completo:</strong> {{ paciente.2 }}</td>
+        </tr>
+        <tr>
+            <td style="width: 221px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Fecha Nac.:</strong> {{ paciente.3 }}</td>
+            <td style="width: 238.34px;; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Estado Civil:</strong> {{ paciente.4 }}</td>
+            <td style="width: 302.66px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Acompañante:</strong> {{ paciente.5 }}</td>
+        </tr>
+        <tr>
+            <td style="width: 221px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Sexo:</strong> {{ paciente.6 }}</td>
+            <td style="width: 238.34px;; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Ocupación:</strong> {{ paciente.7 }}</td>
+            <td style="width: 302.66px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Tel. Acompañante:</strong> {{ paciente.8 }}</td>
+        </tr>
+        <tr>
+            <td style="width: 221px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Dirección:</strong> {{ paciente.9 }}</td>
+            <td style="width: 238.34px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Telefono:</strong> {{ paciente.10 }}</td>
+            <td style="width: 302.66px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Responsable:</strong> {{ paciente.11 }}</td>
+        </tr>
+        <tr>
+            <td style="width: 221px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Municipio:</strong> {{ paciente.12 }}</td>
+            <td style="width: 238.34px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Parentesco Acom.:</strong> {{ paciente.13 }}</td>
+            <td style="width: 302.66px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Tel. Responsable:</strong> {{ paciente.14 }}</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<hr>
+<p style="text-align: right; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Fecha:</strong> {{ prevaloracion.1 }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>Hora:</strong> {{ prevaloracion.2 }}</p>
+<p style="text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: x-small;"><strong>CONSULTA</strong></p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Motivo de Consulta</strong></p>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: xx-small; white-space: pre-line;">{{ prevaloracion.5 }}</p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Examen Mental</strong></p>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: xx-small; white-space: pre-line;">{{ prevaloracion.6 }}</p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Examen Fisico</strong></p>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: xx-small; white-space: pre-line;">{{ prevaloracion.7 }}</p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Antecedentes</strong></p>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: xx-small; white-space: pre-line;">{{ prevaloracion.8 }}</p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Enfermedad Actual e Historia Personal</strong></p>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: xx-small; white-space: pre-line;">{{ prevaloracion.9 }}</p>
+<table style="width: 611px;">
+    <tbody>
+        <tr>
+            <td style="width: 905.875px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Diagnostico Principal:</strong> {{ prevaloracion.10 }} - {{ prevaloracion.11 }}</td>
+        </tr>
+        <tr>
+            <td style="width: 905.875px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Diagnostico Relac. 1:</strong> {{ prevaloracion.12 }} - {{ prevaloracion.13 }}</td>
+        </tr>
+        <tr>
+            <td style="width: 905.875px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Diagnostico Relac. 2:</strong> {{ prevaloracion.14 }} - {{ prevaloracion.15 }}</td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Plan de Tratamiento</strong></p>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: xx-small; white-space: pre-line;">{{ prevaloracion.16 }}</p>
+<br>
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <img src="data:image/png;base64,{{ firma }}" alt="firma-medico" style="width: 180px; height: 64px;">
+                <p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>{{ medico.1 }}</strong></p>
+                <p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>{{ medico.2 }}, Doc.: {{ medico.3 }} R.M.: {{ medico.4 }}</strong></p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

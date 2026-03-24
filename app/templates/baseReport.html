@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/report_style.css') }}">
+<title>{% block title %}{% endblock %}</title>
+<!-- Encabezado -->
+<table style="height: 100px; width: 639.188px;">
+    <tbody>
+        <tr>
+            <td style="width: 150px;" rowspan="5"><img style="font-size: 14px; float: left;" src="{{ url_for('static', filename='img/prosperidad_report.png') }}" alt="logo-prosperidad" width="150" height="64"/></td>
+        </tr>
+        <tr>
+            <td style="width: 20px; text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: large" colspan="2"><strong>PROSPERIDAD IPS S.A.S.</strong></td>
+        </tr>
+        <tr>
+            <td style="width: 20px; text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: small" colspan="2"><strong>NIT:</strong> 901001375 <strong>Codigo Habilitaci&oacute;n:</strong> 087580203101</td>
+        </tr>
+        <tr>
+            <td style="width: 20px; text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: small" colspan="2"><strong>Direcci&oacute;n:</strong> KRA 25A No. 16-82 - <strong>Telefonos:</strong> 6053922969</td>
+        </tr>
+        <tr>
+            <td style="width: 20px;  text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: small" colspan="2"><strong>Email:</strong> <a href="mailto:admisionesprosperidadips@gmail.com">admisionesprosperidadips@gmail.com</a></td>
+        </tr>
+    </tbody>
+</table>
+{% block report %}
+{% endblock %}
+</html>

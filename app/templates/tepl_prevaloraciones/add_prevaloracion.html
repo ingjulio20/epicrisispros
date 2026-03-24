@@ -1,0 +1,252 @@
+{% extends 'menu.html' %}
+{% block title %}Nueva Prevaloración{% endblock %}
+{% block content %}
+<h5 class="title is-5">Nueva Prevaloración</h5>
+<form action="{{ url_for('prevaloraciones.insert_prevaloracion') }}" method="post">
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title">Datos de Prevaloración</p>
+        </header>
+        <div class="card-content">
+            <div class="content">
+                <input type="text" name="medico" id="medico" value="{{ session['codigo'] }}" hidden>
+                <div class="field is-horizontal">
+                    <div class="field-body">
+                        <div class="field has-addons">
+                            <p class="control is-expanded">
+                                <label class="label">Fecha y Hora de Atención</label>
+                                <input type="date" name="fechaAt" id="fechaAt" class="input" readonly required>
+                            </p>
+                            <p class="control is-expanded">
+                                <label class="label" style="color: white;">.</label>
+                                <input type="text" name="horaAt" id="horaAt" class="input">
+                            </p>
+                        </div>
+                        <div class="field has-addons">
+                            <p class="control">
+                                <label class="label">Paciente</label>
+                                <input type="text" name="documentoPac" id="documentoPac" class="input" readonly required>
+                            </p>
+                            <p class="control is-expanded">
+                                <label class="label" style="color: white;">.</label>
+                                <input type="text" name="nombrePac" id="nombrePac" class="input" readonly required>
+                            </p>
+                            <p class="control">
+                                <label class="label" style="color: white;">.</label>
+                                <a class="button is-primary js-modal-trigger" data-target="modalPacientes">
+                                    <span class="icon"><i><img src="{{ url_for('static', filename='img/icons/usuario.png') }}" alt="ico"></i></span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <section class="section scrollable-section">
+                    <div class="field">
+                        <label for="motivoConsulta" class="label">Motivo de Consulta</label>
+                        <p class="control">
+                            <textarea name="motivoConsulta" id="motivoConsulta" class="textarea" required></textarea>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label for="examenMental" class="label">Examen Mental</label>
+                        <p class="control">
+                            <textarea name="examenMental" id="examenMental" class="textarea" required></textarea>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label for="examenFisico" class="label">Examen Fisico</label>
+                        <p class="control">
+                            <textarea name="examenFisico" id="examenFisico" class="textarea" required></textarea>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label for="antecedentes" class="label">Antecedentes</label>
+                        <p class="control">
+                            <textarea name="antecedentes" id="antecedentes" class="textarea" required></textarea>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label for="enfActual" class="label">Enfermedad Actual e Historia Personal</label>
+                        <p class="control">
+                            <textarea name="enfActual" id="enfActual" class="textarea" required></textarea>
+                        </p>
+                    </div>
+                    <label class="label">Diagnosticos</label>
+                    <div class="field is-horizontal">
+                        <div class="field-body">
+                            <div class="field has-addons">
+                                <p class="control">
+                                    <label for="codDiag1" class="field-label is-small">Diagnostico Principal:</label>
+                                </p>
+                                <p class="control">
+                                    <input type="text" name="codDiag1" id="codDiag1" class="input is-small" required>
+                                </p>
+                                <p class="control is-expanded">
+                                    <input type="text" name="nomDiag1" id="nomDiag1" class="input is-small" required>
+                                </p>
+                                <p class="control">
+                                    <a class="button is-small is-primary js-modal-trigger" data-target="modalDiagnosticos">
+                                        <span>...</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-body">
+                            <div class="field has-addons">
+                                <p class="control">
+                                    <label for="codDiag2" class="field-label is-small">Diag. Relacionado 1:</label>
+                                </p>
+                                <p class="control">
+                                    <input type="text" name="codDiag2" id="codDiag2" class="input is-small">
+                                </p>
+                                <p class="control is-expanded">
+                                    <input type="text" name="nomDiag2" id="nomDiag2" class="input is-small">
+                                </p>
+                                <p class="control">
+                                    <a class="button is-small is-primary js-modal-trigger" data-target="modalDiagnosticos">
+                                        <span>...</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-body">
+                            <div class="field has-addons">
+                                <p class="control">
+                                    <label for="codDiag3" class="field-label is-small">Diag. Relacionado 2:</label>
+                                </p>
+                                <p class="control">
+                                    <input type="text" name="codDiag3" id="codDiag3" class="input is-small">
+                                </p>
+                                <p class="control is-expanded">
+                                    <input type="text" name="nomDiag3" id="nomDiag3" class="input is-small">
+                                </p>
+                                <p class="control">
+                                    <a class="button is-small is-primary js-modal-trigger" data-target="modalDiagnosticos">
+                                        <span>...</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                            <button id="btnCorregir" class="button is-small is-primary">
+                                <span>Corregir Diagnosticos</span>
+                            </button>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label for="plan" class="label">Plan de Tratamiento</label>
+                        <p class="control">
+                            <textarea name="plan" id="plan" class="textarea" required></textarea>
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="field is-grouped is-grouped-centered">
+        <p class="control">
+            <button type="submit" class="button is-primary">
+                <span class="icon"><i><img src="{{ url_for('static', filename='img/icons/guardar.png') }}" alt="ico"></i></span>
+                <span>Guardar</span>
+            </button>
+        </p>
+        <p class="control">
+            <a onclick="confirmacion()" class="button is-danger">
+                <span class="icon"><i><img src="{{ url_for('static', filename='img/icons/cancelar.png') }}" alt="ico"></i></span>
+                <span>Cancelar</span>
+            </a>
+            <script>
+                const confirmacion = () => {
+                    Swal.fire({
+                        title: "Esta seguro(a) ?",
+                        text: "Desea cancelar esta operación",
+                        icon: "question",
+                        confirmButtonText: "Si, Cancelar",
+                        showCancelButton: true,
+                        cancelButtonText: "No, Continúar",
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33", 
+                    }).then((result) => {
+                        if(result.isConfirmed){
+                            window.location.href = "{{ url_for('prevaloraciones.prevaloraciones', medico = session['codigo'] ) }}"
+                        }
+                    })
+                }
+            </script>
+        </p>
+    </div>
+</form>
+
+<!-- Modal Pacientes -->
+<div id="modalPacientes" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box" style="width: auto;">
+            <h6 class="title is-6">Busqueda de Pacientes</h6>
+            <table id="tablaModalPacientes" class="table is-hoverable" style="width: 100%; cursor: pointer;">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;" scope="col">No. Documento</th>
+                        <th style="width: 80%;" scope="col">Nombre Completo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for paciente in pacientes %}
+                    <tr>
+                        <td style="width: 20%;">{{ paciente.codigo }}</td>
+                        <td style="width: 80%;">{{ paciente.nombre }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button class="modal-close" aria-label="close"></button>
+</div>
+
+<!-- Modal Diagnosticos -->
+<div id="modalDiagnosticos" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="content">
+            <div class="box" style="width: auto;">
+                <h6 class="title is-6">Busqueda de Diagnosticos</h6>
+                <table id="tablaModalDiagnosticos" class="table is-hoverable" style="width: 100%; cursor: pointer;">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 20%;">Codigo</th>
+                            <th scope="col" style="width: 80%;">Diagnostico</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for diagnostico in diagnosticos %}
+                        <tr>
+                            <td style="width: 20%;">{{ diagnostico.codigo }}</td>
+                            <td style="width: 80%;">{{ diagnostico.nombre }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <button class="modal-close" aria-label="close"></button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/prevaloraciones.js') }}"></script>
+<!-- Script Activar Item del Menú -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let $item1 = document.getElementById("item1")
+        $item1.className = "is-active"
+    })
+</script>
+{% endblock %}

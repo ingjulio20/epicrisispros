@@ -1,0 +1,71 @@
+{% extends 'baseReport.html' %}
+{% block title %}Historia Epicrisis{% endblock%}
+{% block report %}
+<!-- Datos de Paciente -->
+<hr />
+<table style="height: 82px; float: left; width: 640px;">
+    <tbody>
+        <tr>
+            <td style="width: 250px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small">&nbsp;<strong>No. Documento:</strong> {{ paciente.0 }}-{{ paciente.1 }}</td>
+            <td style="width: 541px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small" colspan="2">&nbsp;<strong>Nombre Completo:</strong> {{ paciente.2 }}</td>
+        </tr>
+        <tr>
+            <td style="width: 250px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;">&nbsp;<strong>Fecha Nac.:</strong> {{ paciente.3 }}</td>
+            <td style="width: 238.34px;; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;">&nbsp;<strong>Edad:</strong> {{ paciente.4 }}</td>
+            <td style="width: 302.66px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;">&nbsp;<strong>Sexo:</strong> {{ paciente.5 }}</td>
+        </tr>
+        <tr>
+            <td style="width: 250px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;">&nbsp;<strong>Dirección:</strong> {{ paciente.6 }}</td>
+            <td style="width: 238.34px;; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;">&nbsp;<strong>Telefono:</strong> {{ paciente.7 }}</td>
+            <td style="width: 302.66px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;">&nbsp;<strong>Municipio:</strong> {{ paciente.8 }}</td>
+        </tr>
+        <tr>
+            <td style="width: 250px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;">&nbsp;<strong>Afiliación:</strong> {{ paciente.9 }}</td>
+            <td style="width: 238.34px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;">&nbsp;<strong>Ocupación:</strong> {{ paciente.10 }}</td>
+            <td style="width: 302.66px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;">&nbsp;<strong>Estado Civil:</strong> {{ paciente.11 }}</td>
+        </tr>
+        <tr>
+            <td style="width: 250px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;">&nbsp;<strong>Acompañante:</strong> {{ paciente.12 }}</td>
+            <td style="width: 238.34px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;">&nbsp;<strong>Tel. Acompañante:</strong> {{ paciente.13 }}</td>
+            <td style="width: 302.66px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;">&nbsp;<strong>Parentesco:</strong> {{ paciente.14 }}</td>
+        </tr>
+        <tr>
+            <td style="width: 250px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small">&nbsp;<strong>Responsable:</strong> {{ paciente.15 }}</td>
+            <td style="width: 541px; font-family: Arial, Helvetica, sans-serif; font-size: xx-small" colspan="2">&nbsp;<strong>Tel. Responsable:</strong> {{ paciente.16 }}</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<hr>
+<p style="text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: x-small;"><strong>EPICRISIS</strong></p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Fecha Ingreso:</strong> {{ epicrisis.3 }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>Fecha Egreso:</strong> {{ epicrisis.4 }}</p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Diagnostico Ingreso:</strong> {{ epicrisis.13 }} - {{ epicrisis.14 }}</p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Motivo de Consulta</strong></p>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: xx-small; white-space: pre-line;">{{ epicrisis.8 }}</p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Evolución Clinica (Antecedentes, Enfermedad Actual-Evolución)</strong></p>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: xx-small; white-space: pre-line;">{{ epicrisis.9 }}</p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Tratamiento (Psicofarmacológico, Dosis, Justificación)</strong></p>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: xx-small; white-space: pre-line;">{{ epicrisis.10 }}</p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Examenes Clinicos y Paraclinicos (Justificación y Resultados)</strong></p>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: xx-small; white-space: pre-line;">{{ epicrisis.11 }}</p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Continua hospitalizado parcialmente:</strong> {{ epicrisis.12 }}</p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Diagnostico Egreso:</strong> {{ epicrisis.13 }} - {{ epicrisis.14 }}</p>
+<p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>Plan de Tratamiento (Justificación y Recomendaciones)</strong></p>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: xx-small; white-space: pre-line;">{{ epicrisis.15 }}</p>
+<br>
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <img src="data:image/png;base64,{{ firma }}" alt="firma-medico" style="width: 180px; height: 64px;">
+                <p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>{{ medico.1 }}</strong></p>
+                <p style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: xx-small;"><strong>{{ medico.2 }}, Doc.: {{ medico.3 }} R.M.: {{ medico.4 }}</strong></p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

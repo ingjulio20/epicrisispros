@@ -1,0 +1,11 @@
+/*body { font: 2em Fontin, arial } */
+nav { font-size: .7em }
+
+@page { size: landscape; margin: 1cm }
+@media print {
+    nav { display: none }
+}
+
+.break {
+    page-break-after: always;
+}
