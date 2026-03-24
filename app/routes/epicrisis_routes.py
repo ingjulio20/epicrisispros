@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify
 from app.services import pacientes_service, evoluciones_service, diagnosticos_service, epicrisis_service, medicos_service
 from flask_weasyprint import HTML, render_pdf
 from io import BytesIO
@@ -12,6 +12,26 @@ def epicrisis(medico):
     medico = session['codigo']
     registros = epicrisis_service.listar_epicrisis(medico)
     return render_template('tepl_epicrisis/epicrisis.html', registros = registros)
+
+#Ruta AJAX para traer los registros segun la busqueda
+@bp_epicrisis.post('/getRegistrosEpicrisis')
+def getRegistrosEpicrisis():
+    try:
+        medico = session['codigo']
+        data = request.get_json()
+        #paciente = data.get('paciente')
+        registros = epicrisis_service.listar_epicrisis(medico)
+        if registros:
+            return jsonify(registros), 200
+        else:
+            return jsonify({"Error": f"No se encontrarón registros asociados"}), 404
+        
+    except error.Error as e:
+        return jsonify({"Error": f"{e.msg}"}), 500
+
+    except Exception as ex:
+        return jsonify({"Error": f"{e}"}), 500    
+
 
 @bp_epicrisis.get('/add_epicrisis')
 def add_epicrisis():

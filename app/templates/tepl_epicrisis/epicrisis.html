@@ -23,7 +23,18 @@
         </header>
         <div class="card-content">
             <div class="content">
-                <table id="tablaEpicrisis" class="table is-striped" style="width: 100%;">
+                <!-- RadioButtons para indicar tipo de busqueda -->
+                <div class="control">
+                    <label class="radio">
+                        <input type="radio" name="foobar" />
+                        Foo
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="foobar" checked />
+                        Bar
+                    </label>
+                </div>
+                <!-- <table id="tablaEpicrisis" class="table is-striped" style="width: 100%;">
                     <thead>
                         <tr>
                             <th scope="col" style="width: 5%;">ID</th>
@@ -53,7 +64,7 @@
                         </tr>
                         {% endfor %}
                     </tbody>
-                </table>
+                </table> -->
             </div>
         </div>
     </div>
@@ -111,6 +122,7 @@
     {% endif %}
 {% endwith %}
 
+<script src="{{ url_for('static', filename='js/epicrisis/epicrisis.js') }}"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         let $item2 = document.getElementById("item2")
