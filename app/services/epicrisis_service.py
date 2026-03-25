@@ -1,15 +1,17 @@
 from app.database import db_mysql
 
 #Metodo Listar todos los registros de epicrisis por medico
-def listar_epicrisis(medico):
+def listar_epicrisis(medico, paciente):
     reg_epicrisis = []
     conn = db_mysql.mysql_connection()
-    operation = """ SELECT id_epicrisis, fecha, hora, codigo, nombre FROM epicrisis WHERE medico = %s"""
+    operation = """ SELECT id_epicrisis, fecha, hora, codigo, nombre FROM epicrisis WHERE medico = %s and codigo LIKE %s"""
+    params = (medico, paciente)
     with conn.cursor() as cursor:
-        cursor.execute(operation, (medico, ))
+        cursor.execute(operation, params)
         result = cursor.fetchall()
         for row in result:
-            reg_epicrisis.append({'id': row[0], 'ingreso': row[1], 'egreso': row[2], 'codigo': row[3], 'nombre': row[4]})
+            ingreso = row[1].strftime("%Y-%m-%d") if row[1] else None
+            reg_epicrisis.append({'id': row[0], 'ingreso': ingreso, 'hora': row[2], 'codigo': row[3], 'nombre': row[4]})
 
     conn.close()
     return reg_epicrisis

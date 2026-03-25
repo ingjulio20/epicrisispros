@@ -9,18 +9,18 @@ bp_epicrisis = Blueprint('epicrisis', __name__)
 
 @bp_epicrisis.get('/epicrisis/<medico>')
 def epicrisis(medico):
-    medico = session['codigo']
-    registros = epicrisis_service.listar_epicrisis(medico)
-    return render_template('tepl_epicrisis/epicrisis.html', registros = registros)
+    #medico = session['codigo']
+    #registros = epicrisis_service.listar_epicrisis(medico)
+    return render_template('tepl_epicrisis/epicrisis.html')
 
 #Ruta AJAX para traer los registros segun la busqueda
 @bp_epicrisis.post('/getRegistrosEpicrisis')
 def getRegistrosEpicrisis():
     try:
-        medico = session['codigo']
         data = request.get_json()
-        #paciente = data.get('paciente')
-        registros = epicrisis_service.listar_epicrisis(medico)
+        medico = data.get('med')
+        paciente = data.get('paciente')
+        registros = epicrisis_service.listar_epicrisis(medico, paciente)
         if registros:
             return jsonify(registros), 200
         else:
@@ -30,7 +30,7 @@ def getRegistrosEpicrisis():
         return jsonify({"Error": f"{e.msg}"}), 500
 
     except Exception as ex:
-        return jsonify({"Error": f"{e}"}), 500    
+        return jsonify({"Error": f"{ex}"}), 500    
 
 
 @bp_epicrisis.get('/add_epicrisis')
