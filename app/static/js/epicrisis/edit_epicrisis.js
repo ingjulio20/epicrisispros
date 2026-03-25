@@ -59,5 +59,4 @@ function closeModal($el) {
     (document.querySelectorAll('.modal') || []).forEach(($modal) => {
       closeModal($modal);
     });
-  }
-
+  };

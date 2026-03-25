@@ -7,7 +7,7 @@ from app.routes.prevaloraciones_routes import bp_prevaloraciones
 
 #Instancia Principal
 def application():
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder="templates")
 
     #Configuración
     app.secret_key = '3p1cr1s15_K3&'

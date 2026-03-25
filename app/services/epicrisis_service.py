@@ -48,15 +48,15 @@ def listar_epicrisis_id(id_epicrisis):
     return epicrisis        
 
 #Metodo Insertar Nueva epicrisis en BD
-def insert_epicrisis(fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, motivo_consulta, evolucion_clinica,
+def insert_epicrisis(fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, atencion, motivo_consulta, evolucion_clinica,
                     tratamiento, examen_clinico, continua, cod_diag, nom_diag, plan):
     
     conn = db_mysql.mysql_connection()
-    operation = """ INSERT INTO epicrisis (fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, motivo_consulta, evolucion_clinica,
+    operation = """ INSERT INTO epicrisis (fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, atencion, motivo_consulta, evolucion_clinica,
                     tratamiento, examen_clinico, continua, cod_diag, nom_diag, plan)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) """
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) """
 
-    params = (fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, motivo_consulta, evolucion_clinica,
+    params = (fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, atencion, motivo_consulta, evolucion_clinica,
               tratamiento, examen_clinico, continua, cod_diag, nom_diag, plan)
     with conn.cursor() as cursor:
         cursor.execute(operation, params)
@@ -64,15 +64,15 @@ def insert_epicrisis(fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, m
         conn.close()
 
 #Metodo Modificar epicrisis en BD
-def update_epicrisis(fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, motivo_consulta, evolucion_clinica,
+def update_epicrisis(fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, atencion, motivo_consulta, evolucion_clinica,
                      tratamiento, examen_clinico, continua, cod_diag, nom_diag, plan, id_epicrisis):
 
     conn = db_mysql.mysql_connection()
-    operation = """ UPDATE epicrisis SET fecha = %s, hora = %s, fecha_ingreso = %s, fecha_egreso = %s, codigo = %s, nombre = %s, medico = %s,
+    operation = """ UPDATE epicrisis SET fecha = %s, hora = %s, fecha_ingreso = %s, fecha_egreso = %s, codigo = %s, nombre = %s, medico = %s, atencion = %s
                     motivo_consulta = %s, evolucion_clinica = %s, tratamiento = %s, examen_clinico = %s, continua = %s,
                     cod_diag = %s, nom_diag = %s, plan = %s WHERE id_epicrisis = %s """ 
 
-    params = (fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, motivo_consulta, evolucion_clinica, tratamiento,
+    params = (fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, atencion, motivo_consulta, evolucion_clinica, tratamiento,
               examen_clinico, continua, cod_diag, nom_diag, plan, id_epicrisis)
 
     with conn.cursor() as cursor:

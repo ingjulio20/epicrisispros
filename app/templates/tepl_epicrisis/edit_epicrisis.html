@@ -22,6 +22,10 @@
                                 <label for="hora" class="label is-small">Hora Registro</label>
                                 <input type="text" name="hora" id="hora" class="input is-small" value="{{ epicrisis.2 }}" required>
                             </p>
+                            <p class="control">
+                                <label for="atencion" class="label is-small">Historia Asociada</label>
+                                <input type="number" name="atencion" id="atencion" class="input is-small" value="{{ epicrisis.8 }}" readonly required>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -62,17 +66,16 @@
                             <!-- <textarea class="textarea is-uppercase" name="motivo_consulta" id="motivo_consulta" required>{{ epicrisis.8 }}</textarea> -->
                             <span class="select">
                                 <select name="motivo_consulta" id="motivo_consulta" required>
-                                    <option value="{{ epicrisis.8 }}">{{ epicrisis.8 }}</option>
-                                    <option value="INGRESO A PROGRAMA DE HOSPITAL DÍA">INGRESO A PROGRAMA DE HOSPITAL DÍA</option>
-                                    <option value="CONTINÚA EN PROGRAMA DE HOSPITAL DÍA">CONTINÚA EN PROGRAMA DE HOSPITAL DÍA</option>
-                                    <option value="EGRESO DE PROGRAMA DE HOSPITAL DÍA">EGRESO DE PROGRAMA DE HOSPITAL DÍA</option>
+                                    <option value="INGRESO A PROGRAMA DE HOSPITAL DÍA" {% if epicrisis.9 == 'INGRESO A PROGRAMA DE HOSPITAL DÍA'%} selected {% endif %}>INGRESO A PROGRAMA DE HOSPITAL DÍA</option>
+                                    <option value="CONTINÚA EN PROGRAMA DE HOSPITAL DÍA" {% if epicrisis.9 == 'CONTINÚA EN PROGRAMA DE HOSPITAL DÍA'%} selected {% endif %}>CONTINÚA EN PROGRAMA DE HOSPITAL DÍA</option>
+                                    <option value="EGRESO DE PROGRAMA DE HOSPITAL DÍA" {% if epicrisis.9 == 'EGRESO DE PROGRAMA DE HOSPITAL DÍA'%} selected {% endif %}>EGRESO DE PROGRAMA DE HOSPITAL DÍA</option>
                                 </select>
                              </span>
                     </div>
                     <div class="field">
                         <label for="evolucion_clinica" class="label">Evolución Clinica</label>
                         <p class="control">
-                            <textarea class="textarea is-uppercase" name="evolucion_clinica" id="evolucion_clinica" required>{{ epicrisis.9 }}</textarea>
+                            <textarea class="textarea is-uppercase" name="evolucion_clinica" id="evolucion_clinica" required>{{ epicrisis.10 }}</textarea>
                         </p>
                         <a onclick="consulta_ajax()" class="button is-small is-primary">
                             <span>Consultar Evos.</span>
@@ -84,13 +87,13 @@
                     <div class="field">
                         <label for="tratamiento" class="label">Tratamiento</label>
                         <p class="control">
-                            <textarea class="textarea is-uppercase" name="tratamiento" id="tratamiento" required>{{ epicrisis.10 }}</textarea>
+                            <textarea class="textarea is-uppercase" name="tratamiento" id="tratamiento" required>{{ epicrisis.11 }}</textarea>
                         </p>
                     </div>
                     <div class="field">
                         <label for="examen_clinico" class="label">Examenes Clinicos y Paraclinicos</label>
                         <p class="control">
-                            <textarea class="textarea is-uppercase" name="examen_clinico" id="examen_clinico" required>{{ epicrisis.11 }}</textarea>
+                            <textarea class="textarea is-uppercase" name="examen_clinico" id="examen_clinico" required>{{ epicrisis.12 }}</textarea>
                         </p>
                     </div>
                     <div class="field has-addons">
@@ -100,13 +103,8 @@
                         <p class="control">
                             <span class="select">
                                 <select name="continua" id="continua" required>
-                                    {% if epicrisis.12 == SÍ%}
-                                    <option value="{{ epicrisis.12 }}">{{ epicrisis.12 }}</option>
-                                    {% else %}
-                                    <option value="{{ epicrisis.12 }}">{{ epicrisis.12 }}</option>
-                                    {% endif %}
-                                    <option value="SÍ">SÍ</option>
-                                    <option value="NO">NO</option>
+                                    <option value="SÍ" {% if epicrisis.13 == 'SÍ'%} selected {% endif %}>SÍ</option>
+                                    <option value="NO" {% if epicrisis.13 == 'NO'%} selected {% endif %}>NO</option>
                                 </select>
                             </span>
                         </p>
@@ -114,11 +112,11 @@
                     <div class="field has-addons">
                         <p class="control">
                             <label class="label">Diagnostico de Egreso:</label>
-                            <input type="text" name="cod_diag" id="cod_diag" class="input" value="{{ epicrisis.13 }}" readonly required>
+                            <input type="text" name="cod_diag" id="cod_diag" class="input" value="{{ epicrisis.14 }}" readonly required>
                         </p>
                         <p class="control is-expanded">
                             <label class="label" style="color: white;">.</label>
-                            <input type="text" name="nom_diag" id="nom_diag" class="input" value="{{ epicrisis.14 }}" readonly required>
+                            <input type="text" name="nom_diag" id="nom_diag" class="input" value="{{ epicrisis.15 }}" readonly required>
                         </p>
                         <p class="control">
                             <label class="label" style="color: white;">.</label>
@@ -130,7 +128,7 @@
                     <div class="field">
                         <label for="plan" class="label">Plan de Tratamiento</label>
                         <p class="control">
-                            <textarea class="textarea is-uppercase" name="plan" id="plan" required>{{ epicrisis.15 }}</textarea>
+                            <textarea class="textarea is-uppercase" name="plan" id="plan" required>{{ epicrisis.16 }}</textarea>
                         </p>
                     </div>
                 </section>
@@ -243,7 +241,7 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/epicrisis.js') }}"></script>
+<script src="{{ url_for('static', filename='js/epicrisis/edit_epicrisis.js') }}"></script>
 
 <!-- Script Activar Item del Menú -->
 <script>

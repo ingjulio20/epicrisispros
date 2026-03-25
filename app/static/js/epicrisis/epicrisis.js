@@ -85,8 +85,11 @@ const getRegistrosEpicrisisDoc = () => {
                 <td style="width: 30%; font-size: small;">${registro.nombre}</td>
                 <td style="width: 10%; font-size: small;">${registro.historia}</td>
                 <td style="width: 10%; font-size: small;">
-                    <a onclick="activarModal()" class="button is-small is-info has-tooltip-bottom" data-tooltip="Vista Previa">
-                        <span class="icon is-small"><i aria-hidden="true"><img src="./static/img/icons/pdf.png" alt="icon"></i></span>
+                    <a href="/edit_epicrisis/${registro.id}" class="button is-small is-info has-tooltip-bottom" data-tooltip="Editar">
+                        <span class="icon is-small"><i aria-hidden="true"><img src="../static/img/icons/editar.png" alt="icon"></i></span>
+                    </a>
+                    <a onclick="activarModal('${registro.codigo}', ${registro.id}, '${med}')" class="button is-small is-info has-tooltip-bottom" data-tooltip="Vista Previa">
+                        <span class="icon is-small"><i aria-hidden="true"><img src="../static/img/icons/pdf.png" alt="icon"></i></span>
                     </a>
                 </td>
             `
@@ -112,7 +115,7 @@ const validarHistoria = () => {
             }
         });
     } else {
-        alert("Prueba Exitosa");
+        getRegistrosEpicrisisHisto();
     };
 };
 busquedaEpicrisisHistoria.addEventListener("keypress", (e) => {
@@ -157,7 +160,12 @@ const getRegistrosEpicrisisHisto = () => {
                 <td style="width: 30%; font-size: small;">${registro.nombre}</td>
                 <td style="width: 10%; font-size: small;">${registro.historia}</td>
                 <td style="width: 10%; font-size: small;">
-                
+                    <a href="/edit_epicrisis/${registro.id}" class="button is-small is-info has-tooltip-bottom" data-tooltip="Editar">
+                        <span class="icon is-small"><i aria-hidden="true"><img src="../static/img/icons/editar.png" alt="icon"></i></span>
+                    </a>
+                    <a onclick="activarModal('${registro.codigo}', ${registro.id}, '${med}')" class="button is-small is-info has-tooltip-bottom" data-tooltip="Vista Previa">
+                        <span class="icon is-small"><i aria-hidden="true"><img src="../static/img/icons/pdf.png" alt="icon"></i></span>
+                    </a>
                 </td>
             `
         });
@@ -167,7 +175,16 @@ const getRegistrosEpicrisisHisto = () => {
 
 /* Activar/Desactivar Modal Vista Previa */
 const modalVistaPrevia = document.getElementById("modalVistaPrevia");
-const activarModal = () => {
+const btn_cerrarModal = document.getElementById("btn_cerrarModal");
+const iframeVistaPrevia = document.getElementById("iframeVistaPrevia");
+const activarModal = (codigo, id, med) => {
     modalVistaPrevia.classList.remove("is-hidden");
     modalVistaPrevia.classList.add("is-active");
-}
+    iframeVistaPrevia.src = `/hc_epicrisis/${codigo}/${id}/${med}`;
+};
+
+btn_cerrarModal.addEventListener("click", (e) => {
+    e.preventDefault();
+    modalVistaPrevia.classList.remove("is-active");
+    iframeVistaPrevia.src = "";
+})

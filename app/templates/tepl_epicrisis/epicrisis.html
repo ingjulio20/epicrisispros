@@ -70,25 +70,7 @@
                                 <th scope="col" style="width: 10%; font-size: small;">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- {% for registro in registros %}
-                            <tr>
-                                <td style="width: 5%;">{{ registro.id }}</td>
-                                <td style="width: 15%;">{{ registro.ingreso }}</td>
-                                <td style="width: 15%;">{{ registro.egreso }}</td>
-                                <td style="width: 15%;">{{ registro.codigo }}</td>
-                                <td style="width: 40%;">{{ registro.nombre }}</td>
-                                <td style="width: 10%;">
-                                    <a href="/edit_epicrisis/{{ registro.id }}" class="button is-small is-primary">
-                                        <span class="icon is-small"><i><img src="{{ url_for('static', filename='img/icons/editar.png') }}" alt="ico"></i></span>
-                                    </a>
-                                    <a href="/hc_epicrisis/{{ registro.codigo }}/{{ registro.id }}/{{ session['codigo'] }}" target="_self" class="button is-small is-primary">
-                                        <span class="icon is-small"><i><img src="{{ url_for('static', filename='img/icons/imprimir.png') }}" alt="ico"></i></span>
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %} -->
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </section>
             </div>
@@ -103,10 +85,10 @@
         <div class="box">
             <h5 class="title is-5">Vista Previa</h5>
             <!-- Iframe -->
-            <iframe id="iframeVistaPrevia" src="" frameborder="0" width="100%" height="600px"></iframe>
+            <iframe id="iframeVistaPrevia" frameborder="1" width="100%" height="600"></iframe>
         </div>
     </div>
-    <button class="modal-close is-large" aria-label="close"></button>
+    <button id="btn_cerrarModal" class="modal-close is-large" aria-label="close"></button>
 </div>
 
 <!-- Modal Form Descarga por lote -->
@@ -162,6 +144,7 @@
 {% endwith %}
 
 <script src="{{ url_for('static', filename='js/epicrisis/epicrisis.js') }}"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         let $item2 = document.getElementById("item2")

@@ -68,6 +68,7 @@ def insert_epicrisis():
             codigo = request.form["codigo"]
             nombre = request.form["paciente"]
             medico = request.form["medico"]
+            atencion = request.form["atencion"]
             motivo_consulta = request.form["motivo_consulta"]
             evolucion_clinica = request.form["evolucion_clinica"]
             tratamiento = request.form["tratamiento"]
@@ -77,7 +78,7 @@ def insert_epicrisis():
             nom_diag = request.form["nom_diag"]
             plan = request.form["plan"]
 
-            epicrisis_service.insert_epicrisis(fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, motivo_consulta, evolucion_clinica,
+            epicrisis_service.insert_epicrisis(fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, atencion, motivo_consulta, evolucion_clinica,
                                                tratamiento, examen_clinico, continua, cod_diag, nom_diag, plan)
             
             flash("H.C. Epicrisis guardada exitosamente", "success")
@@ -109,6 +110,7 @@ def update_epicrisis():
             codigo = request.form["codigo"]
             nombre = request.form["paciente"]
             medico = request.form["medico"]
+            atencion = request.form["atencion"]
             motivo_consulta = request.form["motivo_consulta"]
             evolucion_clinica = request.form["evolucion_clinica"]
             tratamiento = request.form["tratamiento"]
@@ -119,7 +121,7 @@ def update_epicrisis():
             plan = request.form["plan"]
             id_epicrisis = request.form["id_epicrisis"]
 
-            epicrisis_service.update_epicrisis(fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, motivo_consulta, evolucion_clinica,
+            epicrisis_service.update_epicrisis(fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, medico, atencion, motivo_consulta, evolucion_clinica,
                                                tratamiento, examen_clinico, continua, cod_diag, nom_diag, plan, id_epicrisis)
             
             flash("H. C. Epicrisis actualizada exitosamente", "success")

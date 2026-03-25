@@ -21,6 +21,10 @@
                                 <label for="hora" class="label is-small">Hora Registro</label>
                                 <input type="time" name="hora" id="hora" class="input is-small" readonly required>
                             </p>
+                            <p class="control">
+                                <label for="atencion" class="label is-small">Historia Asociada</label>
+                                <input type="number" name="atencion" id="atencion" class="input is-small" readonly required>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -238,7 +242,7 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/add_epicrisis.js') }}"></script>
+<script src="{{ url_for('static', filename='js/epicrisis/add_epicrisis.js') }}"></script>
 
 <!-- Script Activar Item del Menú -->
 <script>
