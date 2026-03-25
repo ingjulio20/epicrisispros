@@ -13,18 +13,18 @@ def epicrisis(medico):
     #registros = epicrisis_service.listar_epicrisis(medico)
     return render_template('tepl_epicrisis/epicrisis.html')
 
-#Ruta AJAX para traer los registros segun la busqueda
-@bp_epicrisis.post('/getRegistrosEpicrisis')
-def getRegistrosEpicrisis():
+#Ruta AJAX para traer los registros segun la busqueda x documento
+@bp_epicrisis.post('/getRegistrosEpicrisisDoc')
+def getRegistrosEpicrisisDoc():
     try:
         data = request.get_json()
         medico = data.get('med')
         paciente = data.get('paciente')
-        registros = epicrisis_service.listar_epicrisis(medico, paciente)
+        registros = epicrisis_service.listar_epicrisis_documento(medico, paciente)
         if registros:
             return jsonify(registros), 200
         else:
-            return jsonify({"Error": f"No se encontrarón registros asociados"}), 404
+            return jsonify({"Error": f"No se encontraron registros asociados"}), 404
         
     except error.Error as e:
         return jsonify({"Error": f"{e.msg}"}), 500
@@ -32,6 +32,24 @@ def getRegistrosEpicrisis():
     except Exception as ex:
         return jsonify({"Error": f"{ex}"}), 500    
 
+#Ruta AJAX para traer los registros según la busqueda x historia
+@bp_epicrisis.post('/getRegistrosEpicrisisHisto')
+def getRegistrosEpicrisisHisto():
+    try:
+        data = request.get_json()
+        medico = data.get('med')
+        historia = data.get('historia')
+        registros = epicrisis_service.listar_epicrisis_atencion(medico, historia)
+        if registros:
+            return jsonify(registros), 200
+        else:
+            return jsonify({"Error": "No se encontraron registros asociados"}), 404
+        
+    except error.Error as e:
+        return jsonify({"Error": f"{e.msg}"}), 500
+    
+    except Exception as ex:
+        return jsonify({"Error": f"{ex}"}), 500
 
 @bp_epicrisis.get('/add_epicrisis')
 def add_epicrisis():

@@ -1,20 +1,38 @@
 from app.database import db_mysql
 
-#Metodo Listar todos los registros de epicrisis por medico
-def listar_epicrisis(medico, paciente):
+#Metodo Listar todos los registros de epicrisis por medico y paciente
+def listar_epicrisis_documento(medico, paciente):
     reg_epicrisis = []
     conn = db_mysql.mysql_connection()
-    operation = """ SELECT id_epicrisis, fecha, hora, codigo, nombre FROM epicrisis WHERE medico = %s and codigo LIKE %s"""
+    operation = """ SELECT id_epicrisis, fecha, hora, codigo, nombre, atencion FROM epicrisis WHERE medico = %s and codigo LIKE %s"""
     params = (medico, paciente)
     with conn.cursor() as cursor:
         cursor.execute(operation, params)
         result = cursor.fetchall()
         for row in result:
             ingreso = row[1].strftime("%Y-%m-%d") if row[1] else None
-            reg_epicrisis.append({'id': row[0], 'ingreso': ingreso, 'hora': row[2], 'codigo': row[3], 'nombre': row[4]})
+            atencion = row[5] if row[5] else None
+            reg_epicrisis.append({'id': row[0], 'ingreso': ingreso, 'hora': row[2], 'codigo': row[3], 'nombre': row[4], 'historia': atencion})
 
     conn.close()
     return reg_epicrisis
+
+#Metodo listar todos los registros de epicrisis por medico y atencion
+def listar_epicrisis_atencion(medico, historia):
+    reg_epicrisis = []
+    conn = db_mysql.mysql_connection()
+    operation = """ SELECT id_epicrisis, fecha, hora, codigo, nombre, atencion FROM epicrisis WHERE medico = %s and atencion LIKE %s"""
+    params = (medico, historia)
+    with conn.cursor() as cursor:
+        cursor.execute(operation, params)
+        result = cursor.fetchall()
+        for row in result:
+            ingreso = row[1].strftime("%Y-%m-%d") if row[1] else None
+            atencion = row[5] if row[5] else None
+            reg_epicrisis.append({'id': row[0], 'ingreso': ingreso, 'hora': row[2], 'codigo': row[3], 'nombre': row[4], 'historia': atencion})
+
+    conn.close()
+    return reg_epicrisis    
 
 #Metodo Listar epicrisis individual
 def listar_epicrisis_id(id_epicrisis):
