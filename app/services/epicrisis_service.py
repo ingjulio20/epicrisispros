@@ -4,7 +4,7 @@ from app.database import db_mysql
 def listar_epicrisis_documento(medico, paciente):
     reg_epicrisis = []
     conn = db_mysql.mysql_connection()
-    operation = """ SELECT id_epicrisis, fecha, hora, codigo, nombre, atencion FROM epicrisis WHERE medico = %s and codigo LIKE %s"""
+    operation = """ SELECT id_epicrisis, fecha, hora, codigo, nombre, atencion FROM epicrisis WHERE medico = %s and codigo LIKE %s ORDER BY id_epicrisis DESC"""
     params = (medico, paciente)
     with conn.cursor() as cursor:
         cursor.execute(operation, params)
@@ -21,7 +21,7 @@ def listar_epicrisis_documento(medico, paciente):
 def listar_epicrisis_atencion(medico, historia):
     reg_epicrisis = []
     conn = db_mysql.mysql_connection()
-    operation = """ SELECT id_epicrisis, fecha, hora, codigo, nombre, atencion FROM epicrisis WHERE medico = %s and atencion LIKE %s"""
+    operation = """ SELECT id_epicrisis, fecha, hora, codigo, nombre, atencion FROM epicrisis WHERE medico = %s and atencion LIKE %s ORDER BY id_epicrisis DESC"""
     params = (medico, historia)
     with conn.cursor() as cursor:
         cursor.execute(operation, params)
@@ -68,7 +68,7 @@ def update_epicrisis(fecha, hora, fecha_ingreso, fecha_egreso, codigo, nombre, m
                      tratamiento, examen_clinico, continua, cod_diag, nom_diag, plan, id_epicrisis):
 
     conn = db_mysql.mysql_connection()
-    operation = """ UPDATE epicrisis SET fecha = %s, hora = %s, fecha_ingreso = %s, fecha_egreso = %s, codigo = %s, nombre = %s, medico = %s, atencion = %s
+    operation = """ UPDATE epicrisis SET fecha = %s, hora = %s, fecha_ingreso = %s, fecha_egreso = %s, codigo = %s, nombre = %s, medico = %s, atencion = %s,
                     motivo_consulta = %s, evolucion_clinica = %s, tratamiento = %s, examen_clinico = %s, continua = %s,
                     cod_diag = %s, nom_diag = %s, plan = %s WHERE id_epicrisis = %s """ 
 

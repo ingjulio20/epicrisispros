@@ -6,7 +6,7 @@ from app.routes.epicrisis_routes import bp_epicrisis
 from app.routes.prevaloraciones_routes import bp_prevaloraciones
 
 #Instancia Principal
-def application():
+def create_app():
     app = Flask(__name__, template_folder="templates")
 
     #Configuración
@@ -32,3 +32,4 @@ def application():
         
     return app    
 
+application = create_app()
